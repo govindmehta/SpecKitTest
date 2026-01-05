@@ -21,27 +21,27 @@
 
 ### Backend Setup
 
-- [ ] T001 [P] Initialize Node.js project with package.json in backend/
-- [ ] T002 [P] Install backend dependencies (Express, Mongoose, jsonwebtoken, bcrypt, express-validator, cors, helmet, dotenv) in backend/
-- [ ] T003 [P] Install backend dev dependencies (Jest, Supertest, nodemon, eslint) in backend/
-- [ ] T004 Create backend/.env.example with all required environment variables (PORT, MONGODB_URI, JWT_SECRET, REFRESH_SECRET, CORS_ORIGIN)
-- [ ] T005 Create backend/src/server.js with Express app initialization, middleware setup, and MongoDB connection
-- [ ] T006 [P] Configure backend/package.json scripts (start, dev, test, test:watch, test:coverage)
-- [ ] T007 [P] Configure Jest in backend/jest.config.js for unit and integration tests
+- [x] T001 [P] Initialize Node.js project with package.json in backend/
+- [x] T002 [P] Install backend dependencies (Express, Mongoose, jsonwebtoken, bcrypt, express-validator, cors, helmet, dotenv) in backend/
+- [x] T003 [P] Install backend dev dependencies (Jest, Supertest, nodemon, eslint) in backend/
+- [x] T004 Create backend/.env.example with all required environment variables (PORT, MONGODB_URI, JWT_SECRET, REFRESH_SECRET, CORS_ORIGIN)
+- [x] T005 Create backend/src/server.js with Express app initialization, middleware setup, and MongoDB connection
+- [x] T006 [P] Configure backend/package.json scripts (start, dev, test, test:watch, test:coverage)
+- [x] T007 [P] Configure Jest in backend/jest.config.js for unit and integration tests
 
 ### Frontend Setup
 
-- [ ] T008 [P] Initialize Vite React project in frontend/
-- [ ] T009 [P] Install frontend dependencies (zustand, axios, react-router-dom) in frontend/
-- [ ] T010 [P] Install frontend dev dependencies (vitest, @testing-library/react, @testing-library/jest-dom, @playwright/test) in frontend/
-- [ ] T011 Create frontend/.env.example with VITE_API_URL variable
-- [ ] T012 [P] Configure Vite in frontend/vite.config.js with test globals and jsdom environment
-- [ ] T013 [P] Configure frontend/package.json scripts (dev, build, preview, test, test:e2e)
+- [x] T008 [P] Initialize Vite React project in frontend/
+- [x] T009 [P] Install frontend dependencies (zustand, axios, react-router-dom) in frontend/
+- [x] T010 [P] Install frontend dev dependencies (vitest, @testing-library/react, @testing-library/jest-dom, @playwright/test) in frontend/
+- [x] T011 Create frontend/.env.example with VITE_API_URL variable
+- [x] T012 [P] Configure Vite in frontend/vite.config.js with test globals and jsdom environment
+- [x] T013 [P] Configure frontend/package.json scripts (dev, build, preview, test, test:e2e)
 
 ### Verification
 
-- [ ] T014 Verify backend starts successfully with `npm run dev` and connects to MongoDB
-- [ ] T015 Verify frontend starts successfully with `npm run dev` on port 5173
+- [x] T014 Verify backend starts successfully with `npm run dev` and connects to MongoDB
+- [x] T015 Verify frontend starts successfully with `npm run dev` on port 5173
 
 ---
 
