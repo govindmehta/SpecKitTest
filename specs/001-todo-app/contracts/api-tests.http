@@ -1,0 +1,190 @@
+# API Test Cases (HTTP Format)
+
+**Note**: Use with REST clients like VS Code REST Client extension, Postman, or curl.
+
+## Variables
+```
+@baseUrl = http://localhost:3000/api
+@accessToken = {{login.response.body.accessToken}}
+@taskId = {{createTask.response.body.task.id}}
+```
+
+---
+
+## Authentication Tests
+
+### Register New User
+```http
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+```
+
+Expected: 201 Created with user object and tokens
+
+---
+
+### Login
+```http
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+```
+
+Expected: 200 OK with user object and tokens
+
+---
+
+### Login with Invalid Credentials
+```http
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "wrongpassword"
+}
+```
+
+Expected: 401 Unauthorized
+
+---
+
+## Task Tests
+
+### Create Task
+```http
+# @name createTask
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "description": "Buy groceries"
+}
+```
+
+Expected: 201 Created with task object
+
+---
+
+### Create Task with Empty Description
+```http
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "description": ""
+}
+```
+
+Expected: 400 Bad Request with validation error
+
+---
+
+### List All Tasks
+```http
+GET {{baseUrl}}/tasks
+Authorization: Bearer {{accessToken}}
+```
+
+Expected: 200 OK with tasks array
+
+---
+
+### List Incomplete Tasks Only
+```http
+GET {{baseUrl}}/tasks?completed=false
+Authorization: Bearer {{accessToken}}
+```
+
+Expected: 200 OK with incomplete tasks only
+
+---
+
+### Update Task Description
+```http
+PUT {{baseUrl}}/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "description": "Buy groceries and milk",
+  "updatedAt": "2026-01-05T10:00:00.000Z"
+}
+```
+
+Expected: 200 OK with updated task
+
+---
+
+### Complete Task
+```http
+PUT {{baseUrl}}/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "isComplete": true,
+  "updatedAt": "2026-01-05T10:00:00.000Z"
+}
+```
+
+Expected: 200 OK with completedAt timestamp set
+
+---
+
+### Delete Task
+```http
+DELETE {{baseUrl}}/tasks/{{taskId}}
+Authorization: Bearer {{accessToken}}
+```
+
+Expected: 204 No Content
+
+---
+
+### Access Task Without Auth
+```http
+GET {{baseUrl}}/tasks
+```
+
+Expected: 401 Unauthorized
+
+---
+
+## Edge Cases
+
+### Create Task Exceeding Character Limit
+```http
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "description": "{{ 501 character string }}"
+}
+```
+
+Expected: 400 Bad Request
+
+---
+
+### Update Non-Existent Task
+```http
+DELETE {{baseUrl}}/tasks/invalid_id_999
+Authorization: Bearer {{accessToken}}
+```
+
+Expected: 404 Not Found
